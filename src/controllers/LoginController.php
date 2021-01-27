@@ -210,6 +210,14 @@ class LoginController implements ControllerInterface
                     $this->App->Request->request->get('mfa_code') ?? '',
                 );
 
+            // AUTH WITH IMAP
+            case 'imap':
+                return new ImapAuth(
+                    $this->App->Config->configArr,
+                    $this->App->Request->request->get('email'),
+                    $this->App->Request->request->get('password')
+                );
+
             default:
                 throw new ImproperActionException('Could not determine which authentication service to use.');
         }

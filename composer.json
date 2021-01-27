@@ -18,6 +18,7 @@
     "ext-gd": "*",
     "ext-pdo": "*",
     "ext-zip": "*",
+    "ext-imap": "*",
     "defuse/php-encryption": "2.2.*",
     "mpdf/mpdf": "8.0.*",
     "swiftmailer/swiftmailer": "6.2.*",
