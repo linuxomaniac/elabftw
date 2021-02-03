@@ -60,7 +60,7 @@ class ImapAuth implements AuthInterface
 
             // GET DEFAULT TEAMS
             // we directly get the id from the stored config
-            $teamId = (int) $this->configArr['auth_imap_team_default'];
+            $teamId = (int) $this->configArr['saml_team_default'];
             if ($teamId === 0) {
                 throw new ImproperActionException('Could not find team ID to assign user!');
             }

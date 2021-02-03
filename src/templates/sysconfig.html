@@ -50,6 +50,7 @@ MySQL database structure version: {{ App.Config.configArr.schema }}</p>
         <li class='tabhandle' id='tab8'>{{ 'Privacy policy'|trans }}</li>
         <li class='tabhandle' id='tab9'>{{ 'External auth'|trans }}</li>
         <li class='tabhandle' id='tab10'>LDAP</li><span class='beta'>beta</span>
+        <li class='tabhandle' id='tab11'>IMAP authentication</li><span class='beta'>beta</span>
 </ul>
 
 <!-- TAB 1 SERVER -->
@@ -813,6 +814,41 @@ MySQL database structure version: {{ App.Config.configArr.schema }}</p>
 
         <label for='ldap-lastname'>What attribute to look for the lastname:</label>
         <input class='form-control col-md-4' type='text' id='ldap-lastname' placeholder='sn' name='ldap_lastname' value='{{ App.Config.configArr.ldap_lastname }}' />
+
+        <div class='submitButtonDiv'>
+          <button type='submit' name='Submit' class='button btn btn-primary'>{{ 'Save'|trans }}</button>
+        </div>
+      </div>
+    </form>
+</div>
+
+<!-- TAB 11 IMAP AUTHENTICATION -->
+<div class='divhandle box' id='tab11div'>
+    <form method='post' action='app/controllers/SysconfigController.php'>
+      <div class='form-group'>
+        <h3>{{ 'IMAP authentication configuration'|trans }}</h3>
+        <hr>
+        <input type='hidden' name='updateConfig' value='true' />
+
+        <p class='smallgray'>{{ 'This page allows you to configure the IMAP authentication.'|trans }}</p>
+
+        <label for='auth_imap_toggle'>{{ 'Toggle IMAP login'|trans }}</label>
+        <select class='form-control col-md-4' id='auth_imap_toggle' name='auth_imap_toggle'>
+          <option value='1'{{ App.Config.configArr.auth_imap_toggle == '1' ? ' selected' }}>Enabled</option>
+          <option value='0'{{ App.Config.configArr.auth_imap_toggle == '0' ? ' selected' }}>Disabled</option>
+        </select>
+
+        <label for='auth_imap_mailbox'>{{ 'IMAP mailbox'|trans }}</label>
+        <input class='form-control col-md-4' type='text' placeholder='{imap.example.com:143}INBOX' value='{{ App.Config.configArr.auth_imap_mailbox }}' name='auth_imap_mailbox' id='auth_imap_mailbox' />
+        <p class='smallgray'>{{ 'PHP IMAP mailbox string'|trans }}</p>
+
+        <label for='extauth-team-default'>If no team attribute is found, to which team user is assigned?</label>
+        <select class='form-control col-md-4' name='saml_team_default' id='extauth-team-default'>
+          {% for team in teamsArr %}
+            <option {{ team.id == App.Config.configArr.saml_team_default ? 'selected' }} value='{{ team.id }}'>{{ team.name }}</option>
+          {% endfor %}
+          <option {{ 0 == App.Config.configArr.saml_team_default ? 'selected' }} value='0'>Throw error!</option>
+        </select>
 
         <div class='submitButtonDiv'>
           <button type='submit' name='Submit' class='button btn btn-primary'>{{ 'Save'|trans }}</button>

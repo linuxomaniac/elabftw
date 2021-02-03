@@ -85,16 +85,24 @@
           </div>
         </div>
 
-        {% if App.Config.configArr.ldap_toggle %}
-        <!-- Select login type (local or ldap) -->
-        <div class='form-check form-check-inline'>
-          <input class='form-check-input' type='radio' name='auth_type' id='auth_type_local' value='local' checked>
-          <label class='form-check-label' for='auth_type_local'>{{ 'Local'|trans }}</label>
-        </div>
-        <div class='form-check form-check-inline'>
-          <input class='form-check-input' type='radio' name='auth_type' id='auth_type_ldap' value='ldap'>
-          <label class='form-check-label' for='auth_type_ldap'>LDAP</label>
-        </div>
+        {% if App.Config.configArr.ldap_toggle or App.Config.configArr.auth_imap_toggle %}
+          <!-- Select login type (local, ldap or imap) -->
+          <div class='form-check form-check-inline'>
+            <input class='form-check-input' type='radio' name='auth_type' id='auth_type_local' value='local' checked>
+            <label class='form-check-label' for='auth_type_local'>{{ 'Local'|trans }}</label>
+          </div>
+          {% if App.Config.configArr.ldap_toggle %}
+          <div class='form-check form-check-inline'>
+            <input class='form-check-input' type='radio' name='auth_type' id='auth_type_local' value='local' checked>
+            <label class='form-check-label' for='auth_type_local'>{{ 'Local'|trans }}</label>
+          </div>
+          {% endif %}
+          {% if App.Config.configArr.auth_imap_toggle %}
+          <div class='form-check form-check-inline'>
+            <input class='form-check-input' type='radio' name='auth_type' id='auth_type_imap' value='imap'>
+            <label class='form-check-label' for='auth_type_imap'>IMAP</label>
+          </div>
+          {% endif %}
         {% else %}
           <input type='hidden' name='auth_type' value='local'>
         {% endif %}

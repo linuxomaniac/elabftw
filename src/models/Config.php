@@ -245,7 +245,9 @@ class Config
             ('ldap_lastname', 'cn'),
             ('ldap_firstname', 'givenname'),
             ('ldap_team', 'on'),
-            ('ldap_use_tls', '0')";
+            ('ldap_use_tls', '0'),
+            ('auth_imap_toggle', '0'),
+            ('auth_imap_mailbox', '')";
 
         $req = $this->Db->prepare($sql);
         $req->bindParam(':schema', $schema);
